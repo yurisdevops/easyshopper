@@ -1,0 +1,73 @@
+.header {
+  display: flex;
+  justify-content: center;
+  z-index: 99;
+  position: fixed;
+  width: 100%;
+  background-color: azure;
+  transition: all ease-out 0.3s;
+  padding: 8px;
+  top: 0;
+}
+
+.fixed {
+  position: fixed;
+  background-color: rgba(252, 252, 252, 0.74);
+  box-shadow: 0px 6px 20px -12px rgba(0, 0, 0, 0.6); // Padrão
+  -webkit-box-shadow: 0px 6px 20px -12px rgba(0, 0, 0, 0.6); // Webkit
+  -moz-box-shadow: 0px 6px 20px -12px rgba(0, 0, 0, 0.6); // Mozilla
+  backdrop-filter: blur(4px);
+}
+
+.background {
+  background-color: azure;
+}
+
+.menu {
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.logo {
+  width: 120px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoEasy {
+  object-fit: cover;
+  width: 120px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.actionsLinks {
+  display: flex;
+  align-self: center;
+  gap: 15px;
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #148f77;
+    transition: color all ease-in-out 0.2s;
+  }
+  a:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (min-width: 768px) {
+  .actions {
+    gap: 40px;
+  }
+}

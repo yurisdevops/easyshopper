@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-size: 18px;
+    color: #e55b00;
+  }
+}
+
+.content {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentInfo {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  span {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+.divisor {
+  border: 1px solid #e55b00;
+}

@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Roboto", serif;
+}
+
+.container {
+  width: 100%; // Ou um valor fixo, como 600px
+  height: 400px; // Defina a altura conforme sua necessidade
+  position: relative; // Isso pode ajudar se você precisar de posicionamento
+}
+
+.img {
+  width: 100%; // Fazendo com que a imagem ocupe toda a largura do slide
+  height: 100%; // Fazendo com que a imagem ocupe toda a altura do slide
+  background-color: #ccc; // Para visualizar o espaço, remova isto quando usar imagens
+  display: flex; // Para centralizar conteúdo, se necessário
+  justify-content: center; // Centraliza horizontalmente
+  align-items: center; // Centraliza verticalmente
+  font-size: 24px; // Ajusta tamanho do texto dos slides
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff; // Altera a cor dos botões de navegação
+  background-color: rgba(0, 0, 0, 0.5); // Estilo de fundo
+  border-radius: 50%; // Bordas arredondadas
+}
+
+.swiper-pagination-bullet {
+  background: red; // Cor dos bullets de paginação
+}
+
+// Outros estilos que você pode querer
+.mySwiper {
+  border: 2px solid blue; // Para ver o contorno do swiper
+}
