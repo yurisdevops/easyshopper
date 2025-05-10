@@ -1,32 +1,63 @@
-import image1 from "../../assets/image1.jpg";
-import image2 from "../../assets/image2.jpg";
-import image3 from "../../assets/image3.jpg";
-import image4 from "../../assets/image4.jpg";
-import image5 from "../../assets/image5.jpg";
-
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
-const images = [image1, image2, image3, image4, image5];
+interface ImageProps {
+  alt: string;
+  url: string;
+}
 
-export function Carousel() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
+interface SliderProps {
+  images: ImageProps[];
+}
+
+export function Slider({ images }: SliderProps) {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(handleNext, 4000);
+    return () => clearInterval(interval);
+  }, [currentImage]);
+
+  const handleNext = () => {
+    setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentImage((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleDotClick = (index: number) => {
+    setCurrentImage(index);
   };
 
   return (
-    <section className={styles.container}>
-      <Slider {...settings} className={styles.content}>
-        <img src={image1} alt="" className={styles.imageSlide} />
-      </Slider>
-    </section>
+    <div className={styles.slider}>
+      {/* <button className={styles.arrowLeft} onClick={handlePrev}>
+        &lt;
+      </button> */}
+      <div className={styles.imageContainer}>
+        <img
+          className={styles.image}
+          src={images[currentImage].url}
+          alt={images[currentImage].alt}
+        />
+      </div>
+      {/* <button className={styles.arrowRight} onClick={handleNext}>
+        &gt;
+      </button> */}
+      <div className={styles.dots}>
+        {images.map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.dot} ${
+              currentImage === index ? styles.active : ""
+            }`}
+            onClick={() => handleDotClick(index)}
+          ></button>
+        ))}
+      </div>
+    </div>
   );
 }

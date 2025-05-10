@@ -1,12 +1,29 @@
 import { ProductProps } from "../../utils/product.type";
 import { Comments } from "../comments";
 import styles from "./styles.module.scss";
+import { useDispatch } from "react-redux";
+import { addItemCart } from "../../features/cart/cartSlice";
 
 interface ProductInfo {
   product: ProductProps;
 }
 
 export function ProductDetails({ product }: ProductInfo) {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    const itemToAdd = {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.images[0],
+      quantity: 1,
+      totalPrice: product.price,
+    };
+
+    dispatch(addItemCart(itemToAdd));
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Detalhes do produto</h1>
@@ -34,7 +51,7 @@ export function ProductDetails({ product }: ProductInfo) {
                 <span>Avaliação:</span>
                 <p> {product.rating}</p>
               </div>
-              <button>Adicionar ao carrinho</button>
+              <button onClick={handleAddToCart}>Adicionar ao carrinho</button>
             </div>{" "}
             <div className={styles.comments}>
               <Comments product={product} />

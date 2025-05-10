@@ -3,18 +3,44 @@ import api from "../../services/api";
 import { ProductProps } from "../../utils/product.type";
 import { CardProduct } from "../../components/card";
 import styles from "./styles.module.scss";
-import { Carousel } from "../../components/carousel";
+import { Slider } from "../../components/carousel";
+import image01 from "../../assets/carouselImages/01.jpg";
+import image02 from "../../assets/carouselImages/02.jpg";
+import image03 from "../../assets/carouselImages/03.jpg";
+import image04 from "../../assets/carouselImages/04.jpg";
+import image05 from "../../assets/carouselImages/05.jpg";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { setProduct } from "../../features/products/productsSlice";
 
 export function Home() {
   const [products, setProducts] = useState<ProductProps[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  const dispatch = useDispatch();
+
+  const { cart } = useSelector((state: RootState) => state.cart);
+
+  const images = [
+    { alt: "Imagem 01", url: image01 },
+    { alt: "Imagem 02", url: image02 },
+    { alt: "Imagem 03", url: image03 },
+    { alt: "Imagem 04", url: image04 },
+    { alt: "Imagem 05", url: image05 },
+  ];
 
   useEffect(() => {
     const getDataProduct = async () => {
       try {
         const response = await api.get("/products");
+
         setProducts(response.data.products);
+        console.log("Produtos:", response.data.products);
+
+        dispatch(setProduct(response.data.products));
       } catch (error) {
-        console.error("Erro ao buscar os produto:", error);
+        setError("Erro ao carregar produtos, tente novamente!");
       }
     };
     getDataProduct();
@@ -22,7 +48,9 @@ export function Home() {
 
   return (
     <main className={styles.main}>
-      <Carousel />
+      <Slider images={images} />
+      {error && <p className={styles.error}>{error}</p>}
+
       <h1>Produtos em Destaque...</h1>
       <section className={styles.content}>
         {products.map((product) => (

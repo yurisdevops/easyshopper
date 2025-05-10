@@ -1,5 +1,6 @@
 import { ProductProps } from "../../utils/product.type";
 import styles from "./styles.module.scss";
+
 interface ProductInfo {
   product: ProductProps;
 }

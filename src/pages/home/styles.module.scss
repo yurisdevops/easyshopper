@@ -1,11 +1,19 @@
 .main {
   width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    margin-bottom: 50px;
+  }
 }
 
 .content {
   width: 100%;
-  max-width: 1024px;
+  max-width: 1400px;
   height: auto;
   display: grid;
   gap: 44px;
@@ -24,7 +32,6 @@
 }
 
 @media (min-width: 768px) {
-  /* Adjustments for larger screens */
   .content {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
@@ -36,7 +43,7 @@
 
 @media (min-width: 1024px) {
   .content {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 3fr ));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 3fr));
 
     .title {
       font-size: 60px;

@@ -10,12 +10,21 @@ export interface ProductProps {
   category: string;
   description: string;
   id: number;
-  images: string[]; // Alterado para array de strings
+  images: string[];
   price: number;
   rating: number;
   stock: number;
   title: string;
   brand: string;
-  reviews: Review[]; // Alterado para utilizar a interface Review
-  tags: string[]; // Alterado para array de strings
+  reviews: Review[];
+  tags: string[];
+}
+
+export interface ProductCartProps {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  quantity: number;
+  totalPrice: number;
 }
