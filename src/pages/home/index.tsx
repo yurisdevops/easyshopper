@@ -10,8 +10,8 @@ import image03 from "../../assets/carouselImages/03.jpg";
 import image04 from "../../assets/carouselImages/04.jpg";
 import image05 from "../../assets/carouselImages/05.jpg";
 
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../app/store";
+import { useDispatch } from "react-redux";
+
 import { setProduct } from "../../features/products/productsSlice";
 
 export function Home() {
@@ -19,8 +19,6 @@ export function Home() {
   const [error, setError] = useState<string | null>(null);
 
   const dispatch = useDispatch();
-
-  const { cart } = useSelector((state: RootState) => state.cart);
 
   const images = [
     { alt: "Imagem 01", url: image01 },
@@ -33,12 +31,27 @@ export function Home() {
   useEffect(() => {
     const getDataProduct = async () => {
       try {
-        const response = await api.get("/products");
+        const smartResponse = await api.get("/products/category/smartphones");
+        const laptopsResponse = await api.get("/products/category/laptops");
+        const mobileAcessoriesResponse = await api.get(
+          "/products/category/mobile-accessories"
+        );
+        const tabletsResponse = await api.get("/products/category/tablets");
+        const mensWatchesResponse = await api.get(
+          "/products/category/mens-watches"
+        );
 
-        setProducts(response.data.products);
-        console.log("Produtos:", response.data.products);
+        const allProducts = [
+          ...smartResponse.data.products,
+          ...laptopsResponse.data.products,
+          ...mobileAcessoriesResponse.data.products,
+          ...tabletsResponse.data.products,
+          ...mensWatchesResponse.data.products,
+        ];
 
-        dispatch(setProduct(response.data.products));
+        setProducts(allProducts);
+
+        dispatch(setProduct(allProducts));
       } catch (error) {
         setError("Erro ao carregar produtos, tente novamente!");
       }

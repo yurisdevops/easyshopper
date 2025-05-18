@@ -1,12 +1,12 @@
 .slider {
   position: relative;
-  width: 99vw;
+  width: 100vw;
   height: 780px;
   margin: auto;
   overflow: hidden;
-  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin-bottom: 50px;
+  margin-top: 75px;
 }
 
 .imageContainer {
@@ -28,7 +28,7 @@
   top: 50%;
   transform: translateY(-50%);
   background-color: transparent;
-  color: #e55b00;
+  color: var(--orange-600);
   font-weight: bold;
   font-size: 70px;
   border: none;
@@ -67,14 +67,14 @@
 }
 
 .dot.active {
-  background-color: #e55b00;
+  background-color: var(--orange-600);
 }
 
 @media (max-width: 768px) {
   .slider {
     width: 100vw;
     height: 200px;
-    margin-top: 75px;
+    margin-top: 135px;
   }
   .arrowLeft,
   .arrowRight {

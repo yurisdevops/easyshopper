@@ -1,0 +1,152 @@
+.mobileMenu {
+  position: fixed;
+  left: 0;
+  width: 57%;
+  max-width: 300px;
+  height: 100vh;
+  background-color: var(--white);
+  box-shadow: -6px 0px 20px -12px rgba(0, 0, 0, 0.6);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--green-500);
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+.mobileMenuOpen {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.logoMobile {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.logoEasy {
+  width: 120px;
+  object-fit: cover;
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--red-500);
+  transition: color 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* === BARRA DE PESQUISA === */
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  padding: 2px;
+  border-radius: 5px;
+  background-color: transparent;
+
+  button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  h2 {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--black-600);
+  }
+}
+
+.categoriesList {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  li {
+    list-style: none;
+    padding: 10px;
+    color: var(--black-600);
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+    &:active {
+      background-color: var(--green-400);
+    }
+  }
+}
+
+.actionsMobile {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    margin-bottom: 10px;
+  }
+}
+
+.actionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 767px) {
+  .fixed {
+    background-color: var(--background-color);
+    box-shadow: none;
+  }
+  .menu {
+    display: flex;
+    gap: 80px;
+  }
+  .actionsLinks {
+    display: none;
+  }
+
+  .menuButton {
+    display: block;
+  }
+}

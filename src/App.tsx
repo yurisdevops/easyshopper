@@ -6,9 +6,6 @@ import { Cart } from "./pages/cart";
 import { Checkout } from "./pages/checkout";
 import { NotFound } from "./pages/error";
 import { About } from "./pages/about";
-import "./styles/styles.module.scss";
-
-import "swiper/swiper-bundle.css";
 
 function App() {
   return (

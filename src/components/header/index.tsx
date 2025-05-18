@@ -8,11 +8,16 @@ import { RootState } from "../../app/store";
 import { IoSearchCircle } from "react-icons/io5";
 import { searchProduct, clearSearch } from "../../features/search/searchSlice";
 import { useNavigate } from "react-router-dom";
+import { Sidebar } from "../sidebar";
 
 export function Header() {
   const [selectProductId, setSelectProductId] = useState<number | null>(null);
-  const [top, setTop] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [top, setTop] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { cart } = useSelector((state: RootState) => state.cart);
   const searchResults = useSelector(
@@ -20,10 +25,8 @@ export function Header() {
   );
   const product = useSelector((state: RootState) => state.products.products);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    let ticking = false; // Variável para controlar o ticking
+    let ticking = false;
 
     const handleScroll = () => {
       if (!ticking) {
@@ -32,12 +35,12 @@ export function Header() {
           ticking = false;
         });
 
-        ticking = true; // Marcar que estamos em um ciclo de animação
+        ticking = true;
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Para definir o estado inicial
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -56,16 +59,16 @@ export function Header() {
     if (searchTerm.trim() !== "" && selectProductId) {
       dispatch(searchProduct({ products: product, term: searchTerm }));
       navigate(`/products/${selectProductId}`);
-      dispatch(clearSearch()); // Limpa a pesquisa após a navegação
+      dispatch(clearSearch());
     } else {
-      dispatch(clearSearch()); // Limpa a pesquisa se não houver termo válido
+      dispatch(clearSearch());
     }
   };
 
   const handleSelectProduct = (productId: number, productName: string) => {
     setSearchTerm(productName);
     setSelectProductId(productId);
-    dispatch(clearSearch()); // Limpa a pesquisa após a seleção
+    dispatch(clearSearch());
   };
 
   const handleResetSearch = () => {
@@ -73,32 +76,53 @@ export function Header() {
     dispatch(clearSearch());
   };
   return (
-    <header
-      className={`${styles.header} ${!top ? styles.fixed : styles.background}`}
-    >
-      <div className={styles.menu}>
-        <div className={styles.logo}>
-          <Link
-            to={"/"}
-            onClick={() => {
-              window.scrollTo(0, 0);
-              handleResetSearch();
-            }}
-          >
-            <img src={logoEasy} alt="" className={styles.logoEasy} />
-          </Link>
+    <>
+      <header
+        className={`${styles.header} ${
+          !top ? styles.fixed : styles.background
+        }`}
+      >
+        <div className={styles.menu}>
+          <div className={styles.logo}>
+            <button
+              className={styles.menuButton}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span>☰</span>
+            </button>
+            <Link
+              to={"/"}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                handleResetSearch();
+              }}
+            >
+              <img src={logoEasy} alt="" className={styles.logoEasy} />
+            </Link>
+          </div>
+
+          <div className={styles.actions}>
+            <div className={styles.cartContainer}>
+              <Link to={"/cart"} className={styles.logoCart}>
+                <RiShoppingBag2Fill size={32} color="#f39c12" />
+                {cart.length > 0 && (
+                  <span className={styles.cartCount}>{cart.length}</span>
+                )}
+              </Link>
+            </div>
+          </div>
         </div>
         <div className={styles.search}>
           <div className={styles.searchContainer}>
             <input
               type="text"
-              placeholder="O que procura?"
+              placeholder="Digite o que você procura..."
               value={searchTerm}
               onChange={handleSearch}
               className={styles.searchInput}
             />
             <button onClick={handleSearchButton}>
-              <IoSearchCircle size={32} color="#148f77" />{" "}
+              <IoSearchCircle size={44} color="#148f77" />{" "}
             </button>
           </div>
           {searchResults.length > 0 && (
@@ -115,19 +139,14 @@ export function Header() {
             </div>
           )}
         </div>
-        <div className={styles.actions}>
-          <div className={styles.actionsLinks}>
-            <Link to={"/products"}>Produtos</Link>
-            <Link to={"/about"}>Sobre</Link>
-          </div>
-          <Link to={"/cart"} className={styles.logoCart}>
-            <RiShoppingBag2Fill size={32} color="#f39c12" />
-            {cart.length > 0 && (
-              <span className={styles.cartCount}>{cart.length}</span>
-            )}
-          </Link>
-        </div>
+      </header>
+
+      <div
+        className={`${styles.overlay} ${menuOpen ? styles.overlayVisible : ""}`}
+        onClick={() => setMenuOpen(false)}
+      >
+        <Sidebar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       </div>
-    </header>
+    </>
   );
 }

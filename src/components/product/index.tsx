@@ -52,12 +52,12 @@ export function ProductDetails({ product }: ProductInfo) {
                 <p> {product.rating}</p>
               </div>
               <button onClick={handleAddToCart}>Adicionar ao carrinho</button>
-            </div>{" "}
-            <div className={styles.comments}>
-              <Comments product={product} />
             </div>
           </div>
         </div>
+      </div>
+      <div className={styles.comments}>
+        <Comments product={product} />
       </div>
     </div>
   );

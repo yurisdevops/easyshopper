@@ -6,12 +6,12 @@ import {
   removeItemCart,
 } from "../../features/cart/cartSlice";
 import styles from "./styles.module.scss";
-import { Link } from "react-router-dom";
-import { ProductCartProps } from "../../utils/product.type";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Cart() {
-  const { cart, total } = useSelector((state: RootState) => state.cart);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { cart, total } = useSelector((state: RootState) => state.cart);
 
   const handleRemoveItem = (itemId: number) => {
     const itemToRemove = cart.find((item) => item.id === itemId);
@@ -27,9 +27,17 @@ export function Cart() {
     dispatch(decrementItemCart(item));
   };
 
+  const handleToCheckout = () => {
+    if (cart.length > 0) {
+      navigate("/checkout");
+    } else {
+      alert("Seu carrinho está vazio.");
+    }
+  };
+
   return (
     <main className={styles.main}>
-      <section>
+      <section className={styles.container}>
         <h1 className={styles.title}>Meu Carrinho</h1>
         {cart.length > 0 ? (
           cart.map((item) => (
@@ -79,8 +87,12 @@ export function Cart() {
         )}
         {cart.length > 0 ? (
           <div className={styles.totalPrice}>
-            <p>Total: {total}</p>
-            <button className={styles.button}>Finalizar Compra</button>
+            <span>
+              <p>Total:</p> {total}
+            </span>
+            <button onClick={handleToCheckout} className={styles.buttonFinish}>
+              Finalizar Compra
+            </button>
           </div>
         ) : null}
       </section>
