@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-import api from "../../services/api";
 import { useEffect, useState } from "react";
-import { ProductProps } from "../../utils/product.type";
+import { useParams } from "react-router-dom";
 import { ProductDetails } from "../../components/product";
-import styles from "./styles.module.scss";
 import { Suggestions } from "../../components/suggestions";
+import api from "../../services/api";
+import { ProductProps } from "../../utils/product.type";
+import styles from "./styles.module.scss";
 
 export function Products() {
   const { id } = useParams();

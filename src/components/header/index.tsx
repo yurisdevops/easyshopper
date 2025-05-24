@@ -1,14 +1,13 @@
-import { RiShoppingBag2Fill } from "react-icons/ri";
-import styles from "./styles.module.scss";
-import { Link } from "react-router-dom";
-import logoEasy from "../../assets/logo/logoEasy.png";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../app/store";
 import { IoSearchCircle } from "react-icons/io5";
-import { searchProduct, clearSearch } from "../../features/search/searchSlice";
-import { useNavigate } from "react-router-dom";
+import { RiShoppingBag2Fill, RiUser3Fill } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { RootState } from "../../app/store";
+import logoEasy from "../../assets/logo/logoEasy.png";
+import { clearSearch, searchProduct } from "../../features/search/searchSlice";
 import { Sidebar } from "../sidebar";
+import styles from "./styles.module.scss";
 
 export function Header() {
   const [selectProductId, setSelectProductId] = useState<number | null>(null);
@@ -103,6 +102,9 @@ export function Header() {
 
           <div className={styles.actions}>
             <div className={styles.cartContainer}>
+              <Link to={""}>
+                <RiUser3Fill size={32} color="#f39c12" />
+              </Link>
               <Link to={"/cart"} className={styles.logoCart}>
                 <RiShoppingBag2Fill size={32} color="#f39c12" />
                 {cart.length > 0 && (

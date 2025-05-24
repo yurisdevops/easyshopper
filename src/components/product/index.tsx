@@ -1,8 +1,8 @@
+import { useDispatch } from "react-redux";
+import { addItemCart } from "../../features/cart/cartSlice";
 import { ProductProps } from "../../utils/product.type";
 import { Comments } from "../comments";
 import styles from "./styles.module.scss";
-import { useDispatch } from "react-redux";
-import { addItemCart } from "../../features/cart/cartSlice";
 
 interface ProductInfo {
   product: ProductProps;
@@ -26,7 +26,7 @@ export function ProductDetails({ product }: ProductInfo) {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Detalhes do produto</h1>
+      <h2 className={styles.title}>Detalhes do produto...</h2>
       <div className={styles.details}>
         <img src={product.images[0]} alt={product.title} />
         <div className={styles.detailsInfo}>
@@ -56,6 +56,7 @@ export function ProductDetails({ product }: ProductInfo) {
           </div>
         </div>
       </div>
+      <div className={styles.divisor}></div>
       <div className={styles.comments}>
         <Comments product={product} />
       </div>

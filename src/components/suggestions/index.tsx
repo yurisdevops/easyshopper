@@ -1,6 +1,6 @@
-import styles from "./styles.module.scss";
 import { ProductProps } from "../../utils/product.type";
 import { CardProduct } from "../card";
+import styles from "./styles.module.scss";
 
 export function Suggestions({
   suggested = [],

@@ -23,6 +23,8 @@
 }
 .content {
   height: auto;
+  padding: 60px 0;
+
   display: flex;
   flex-direction: column;
 }
@@ -44,7 +46,7 @@
 
 .divisor {
   border: 1px solid #e55b00;
-  height: 200px;
+  height: 180px;
   margin: 0 10px;
 }
 
@@ -67,6 +69,7 @@
 
   .cardComments {
     border-bottom: 2px solid #e55b00;
+    margin-bottom: 10px;
     width: 80%;
   }
 

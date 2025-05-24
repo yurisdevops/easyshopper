@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout";
-import { Home } from "./pages/home";
-import { Products } from "./pages/products";
+import { About } from "./pages/about";
 import { Cart } from "./pages/cart";
 import { Checkout } from "./pages/checkout";
 import { NotFound } from "./pages/error";
-import { About } from "./pages/about";
+import { Home } from "./pages/home";
+import { Products } from "./pages/products";
 
 function App() {
   return (

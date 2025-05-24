@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
-import { ProductProps } from "../../utils/product.type";
-import { CardProduct } from "../../components/card";
-import styles from "./styles.module.scss";
-import { Slider } from "../../components/carousel";
 import image01 from "../../assets/carouselImages/01.jpg";
 import image02 from "../../assets/carouselImages/02.jpg";
 import image03 from "../../assets/carouselImages/03.jpg";
 import image04 from "../../assets/carouselImages/04.jpg";
 import image05 from "../../assets/carouselImages/05.jpg";
+import { CardProduct } from "../../components/card";
+import { Slider } from "../../components/carousel";
+import api from "../../services/api";
+import { ProductProps } from "../../utils/product.type";
+import styles from "./styles.module.scss";
 
 import { useDispatch } from "react-redux";
 

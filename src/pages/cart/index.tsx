@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../app/store";
 import {
   decrementItemCart,
@@ -6,7 +7,6 @@ import {
   removeItemCart,
 } from "../../features/cart/cartSlice";
 import styles from "./styles.module.scss";
-import { Link, useNavigate } from "react-router-dom";
 
 export function Cart() {
   const navigate = useNavigate();
@@ -38,49 +38,54 @@ export function Cart() {
   return (
     <main className={styles.main}>
       <section className={styles.container}>
-        <h1 className={styles.title}>Meu Carrinho</h1>
+        <h1 className={styles.title}>Meu Carrinho...</h1>
         {cart.length > 0 ? (
           cart.map((item) => (
-            <div key={item.id} className={styles.content}>
-              <div className={styles.cartItem}>
-                <Link to={`/products/${item.id}`}>
-                  <img src={item.image} alt={item.title} />
-                </Link>
-                <div className={styles.cartInfo}>
-                  <div className={styles.cartDetails}>
-                    <h2>{item.title}</h2>
-                    <p className={styles.price}>
-                      {item.price.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </p>
-                    <div className={styles.quantity}>
-                      <p>Quantidade:</p>
-                      <button
-                        className={styles.button}
-                        onClick={() => handleDecrementItem(item.id)}
-                      >
-                        -
-                      </button>
-                      <p className={styles.quantityText}> {item.quantity}</p>
-                      <button
-                        className={styles.button}
-                        onClick={() => handleIncrementItem(item.id)}
-                      >
-                        +
-                      </button>
+            <>
+              <div key={item.id} className={styles.content}>
+                <div className={styles.cartItem}>
+                  <Link to={`/products/${item.id}`}>
+                    <img src={item.image} alt={item.title} />
+                  </Link>
+                  <div className={styles.cartInfo}>
+                    <div className={styles.cartDetails}>
+                      <h2>{item.title}</h2>
+                      <p className={styles.price}>
+                        {item.price.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </p>
+                      <div className={styles.quantity}>
+                        <p>Quantidade:</p>
+                        <div className={styles.amount}>
+                          <button
+                            className={styles.button}
+                            onClick={() => handleDecrementItem(item.id)}
+                          >
+                            -
+                          </button>
+                          <p className={styles.quantityText}>{item.quantity}</p>
+                          <button
+                            className={styles.button}
+                            onClick={() => handleIncrementItem(item.id)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
                     </div>
+                    <button
+                      className={styles.buttonRemove}
+                      onClick={() => handleRemoveItem(item.id)}
+                    >
+                      Remover
+                    </button>
                   </div>
-                  <button
-                    className={styles.buttonRemove}
-                    onClick={() => handleRemoveItem(item.id)}
-                  >
-                    Remover
-                  </button>
                 </div>
               </div>
-            </div>
+              <div className={styles.divisor}></div>
+            </>
           ))
         ) : (
           <div className={styles.span}>Seu carrinho está vazio.</div>

@@ -1,6 +1,6 @@
-import styles from "./styles.module.scss";
-import logoEasy from "../../assets/logo/logoEasy.png";
 import { Link } from "react-router-dom";
+import logoEasy from "../../assets/logo/logoEasy.png";
+import styles from "./styles.module.scss";
 
 interface SidebarProps {
   menuOpen: boolean;
