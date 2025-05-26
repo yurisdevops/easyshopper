@@ -5,7 +5,10 @@ export default {
   extensionsToTreatAsEsm: [".ts"],
   moduleNameMapper: {
     "^firebase/auth$": "<rootDir>/src/services/__mocks__/firebaseAuthMock.ts",
+    "^firebase/firestore$":
+      "<rootDir>/src/services/__mocks__/firebaseFirestoreMock.ts",
   },
+
   transform: {
     "^.+\\.tsx?$": ["ts-jest", { useESM: true }],
   },

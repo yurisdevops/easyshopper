@@ -6,7 +6,7 @@ import {
   removeItemCart,
 } from "./cartSlice";
 
-import { ProductCartProps } from "../../utils/product.type";
+import { ProductCartProps } from "../../utils/@types/product.type";
 
 describe("cartReducer", () => {
   const initialState = { cart: [], total: "R$ 0,00" };

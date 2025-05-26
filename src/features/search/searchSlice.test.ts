@@ -1,4 +1,4 @@
-import { ProductProps } from "../../utils/product.type";
+import { ProductProps } from "../../utils/@types/product.type";
 import { clearSearch, searchProduct, searchReducer } from "./searchSlice";
 
 describe("searchReducer", () => {

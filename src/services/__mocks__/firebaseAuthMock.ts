@@ -5,3 +5,7 @@ export const getAuth = jest.fn(() => ({
 export const createUserWithEmailAndPassword = jest.fn(async () => ({
   user: { uid: "123", email: "test@example.com" },
 }));
+
+export const signInWithEmailAndPassword = jest.fn(async () => ({
+  user: { uid: "123", email: "test@example.com" },
+}));

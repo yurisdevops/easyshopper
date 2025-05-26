@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ProductDetails } from "../../components/product";
-import { Suggestions } from "../../components/suggestions";
+import { ProductDetails } from "../../components/product/Product";
+import { Suggestions } from "../../components/suggestions/Suggestions";
 import api from "../../services/api";
-import { ProductProps } from "../../utils/product.type";
+import { ProductProps } from "../../utils/@types/product.type";
 import styles from "./styles.module.scss";
 
 export function Products() {

@@ -10,24 +10,28 @@ interface SidebarProps {
 export function Sidebar({ menuOpen, setMenuOpen }: SidebarProps) {
   return (
     <div
-      className={`${styles.mobileMenu} ${
-        menuOpen ? styles.mobileMenuOpen : ""
+      className={`${styles["mobile-menu"]} ${
+        menuOpen ? styles["mobile-menu--open"] : ""
       }`}
     >
-      <div className={styles.logoMobile}>
+      <div className={styles["mobile-menu__logo"]}>
         <h1>
-          <img src={logoEasy} alt="" className={styles.logoEasy} />
+          <img
+            src={logoEasy}
+            alt=""
+            className={styles["mobile-menu__logo-img"]}
+          />
         </h1>
         <button
-          className={styles.closeButton}
+          className={styles["mobile-menu__close-button"]}
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <span>✖</span>
         </button>
       </div>
-      <div className={styles.categories}>
+      <div className={styles["mobile-menu__categories"]}>
         <h2>Categorias</h2>
-        <ul className={styles.categoriesList}>
+        <ul className={styles["mobile-menu__categories-list"]}>
           <li>
             <Link to="" onClick={() => setMenuOpen(false)}>
               Todos
@@ -60,9 +64,9 @@ export function Sidebar({ menuOpen, setMenuOpen }: SidebarProps) {
           </li>
         </ul>
       </div>
-      <div className={styles.actionsMobile}>
+      <div className={styles["mobile-menu__actions"]}>
         <h2>Ajuda</h2>
-        <ul className={styles.actionsList}>
+        <ul className={styles["mobile-menu__actions-list"]}>
           <li>
             <Link to="" onClick={() => setMenuOpen(false)}>
               Fale Conosco

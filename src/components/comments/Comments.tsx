@@ -1,4 +1,4 @@
-import { ProductProps } from "../../utils/product.type";
+import { ProductProps } from "../../utils/@types/product.type";
 import styles from "./styles.module.scss";
 
 interface ProductInfo {
@@ -7,37 +7,37 @@ interface ProductInfo {
 
 export function Comments({ product }: ProductInfo) {
   return (
-    <div className={styles.container}>
-      <h2>Comentários</h2>
-      <div className={styles.containerComments}>
+    <div className={styles["comments-section"]}>
+      <h2 className={styles["comments-section__title"]}>Comentários</h2>
+
+      <div className={styles["comments-section__container"]}>
         {product.reviews.map((review, index) => (
-          <>
-            <div className={styles.cardComments}>
-              <div key={index} className={styles.content}>
-                <div className={styles.commentInfo}>
+          <div key={index} className={styles["comments-section__wrapper"]}>
+            <div className={styles["comments-section__card"]}>
+              <div className={styles["comments-section__details"]}>
+                <div className={styles["comments-section__item"]}>
                   <span>Nome:</span>
                   <p>{review.reviewerName}</p>
                 </div>
-                <div className={styles.commentInfo}>
+                <div className={styles["comments-section__item"]}>
                   <span>Email:</span>
                   <p>{review.reviewerEmail}</p>
                 </div>
-                <div className={styles.commentInfo}>
+                <div className={styles["comments-section__item"]}>
                   <span>Resenha:</span>
                   <p>{review.comment}</p>
                 </div>
-                <div className={styles.commentInfo}>
+                <div className={styles["comments-section__item"]}>
                   <span>Avaliação:</span>
                   <p>{review.rating}</p>
                 </div>
-                <div className={styles.commentInfo}>
+                <div className={styles["comments-section__item"]}>
                   <span>Data:</span>
                   <p>{new Date(review.date).toLocaleDateString("pt-BR")}</p>
                 </div>
               </div>
             </div>
-            <div className={styles.divisor}></div>
-          </>
+          </div>
         ))}
       </div>
     </div>

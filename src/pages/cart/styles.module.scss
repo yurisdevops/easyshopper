@@ -12,6 +12,7 @@
   max-width: 1600px;
   width: 100%;
   margin: 0 auto;
+  padding-top: 100px;
 }
 
 .content {
@@ -142,7 +143,7 @@
 }
 
 .totalPrice {
-  position: relative;
+  position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
@@ -174,7 +175,7 @@
   }
 
   .container {
-    margin-top: 150px;
+    margin-top: 60px;
   }
 
   .content {

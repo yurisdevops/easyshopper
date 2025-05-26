@@ -4,14 +4,15 @@ import image02 from "../../assets/carouselImages/02.jpg";
 import image03 from "../../assets/carouselImages/03.jpg";
 import image04 from "../../assets/carouselImages/04.jpg";
 import image05 from "../../assets/carouselImages/05.jpg";
-import { CardProduct } from "../../components/card";
-import { Slider } from "../../components/carousel";
+
 import api from "../../services/api";
-import { ProductProps } from "../../utils/product.type";
+import { ProductProps } from "../../utils/@types/product.type";
 import styles from "./styles.module.scss";
 
 import { useDispatch } from "react-redux";
 
+import { CardProduct } from "../../components/card/Card";
+import { Slider } from "../../components/carousel/Carousel";
 import { setProduct } from "../../features/products/productsSlice";
 
 export function Home() {
@@ -66,9 +67,13 @@ export function Home() {
 
       <h1>Produtos em Destaque...</h1>
       <section className={styles.content}>
-        {products.map((product) => (
-          <CardProduct key={product.id} product={product} />
-        ))}
+        {products.length === 0
+          ? [...Array(20)].map((_, index) => (
+              <div key={index} className={styles.placeholderCard}></div>
+            ))
+          : products.map((product) => (
+              <CardProduct key={product.id} product={product} />
+            ))}
       </section>
     </main>
   );

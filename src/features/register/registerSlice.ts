@@ -3,20 +3,11 @@ import { createUserWithEmailAndPassword, User } from "firebase/auth";
 
 import { auth } from "../../services/firebaseConnection";
 
-interface RegisterUserParams {
-  email: string;
-  password: string;
-}
-
-interface AuthState {
-  user: User | null;
-  loading: boolean;
-  error: string | null;
-}
+import { AuthState, UserParams } from "../../utils/@types/user.type";
 
 export const register = createAsyncThunk<
   User,
-  RegisterUserParams,
+  UserParams,
   { rejectValue: string }
 >("auth/registerUser", async ({ email, password }, thunkAPI) => {
   try {
@@ -37,7 +28,7 @@ const initialState: AuthState = {
   error: null,
 };
 
-const authSlice = createSlice({
+const registerSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
@@ -57,4 +48,4 @@ const authSlice = createSlice({
   },
 });
 
-export const authReducer = authSlice.reducer;
+export const registerReducer = registerSlice.reducer;

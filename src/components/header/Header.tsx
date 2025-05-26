@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { HiMenuAlt3 } from "react-icons/hi";
 import { IoSearchCircle } from "react-icons/io5";
 import { RiShoppingBag2Fill, RiUser3Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,11 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../app/store";
 import logoEasy from "../../assets/logo/logoEasy.png";
 import { clearSearch, searchProduct } from "../../features/search/searchSlice";
-import { Sidebar } from "../sidebar";
+import { Sidebar } from "../sidebar/Sidebar";
 import styles from "./styles.module.scss";
 
 export function Header() {
-  const [selectProductId, setSelectProductId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [top, setTop] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -44,6 +44,11 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    setSearchTerm("");
+    dispatch(clearSearch());
+  }, [location.pathname]);
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
     setSearchTerm(term);
@@ -55,18 +60,19 @@ export function Header() {
   };
 
   const handleSearchButton = () => {
-    if (searchTerm.trim() !== "" && selectProductId) {
+    if (searchTerm.trim() !== "") {
       dispatch(searchProduct({ products: product, term: searchTerm }));
-      navigate(`/products/${selectProductId}`);
+      navigate(`/products/${encodeURIComponent(searchTerm)}`);
       dispatch(clearSearch());
+      setSearchTerm("");
     } else {
       dispatch(clearSearch());
     }
   };
 
-  const handleSelectProduct = (productId: number, productName: string) => {
-    setSearchTerm(productName);
-    setSelectProductId(productId);
+  const handleSelectProduct = (productId: number) => {
+    navigate(`/product/${productId}`);
+    setSearchTerm("");
     dispatch(clearSearch());
   };
 
@@ -78,16 +84,16 @@ export function Header() {
     <>
       <header
         className={`${styles.header} ${
-          !top ? styles.fixed : styles.background
+          !top ? styles["header--fixed"] : styles["header--background"]
         }`}
       >
-        <div className={styles.menu}>
-          <div className={styles.logo}>
+        <div className={styles["header__menu"]}>
+          <div className={styles["header__logo"]}>
             <button
-              className={styles.menuButton}
+              className={styles["header__menu-button"]}
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              <span>☰</span>
+              <HiMenuAlt3 size={32} />
             </button>
             <Link
               to={"/"}
@@ -96,44 +102,56 @@ export function Header() {
                 handleResetSearch();
               }}
             >
-              <img src={logoEasy} alt="" className={styles.logoEasy} />
+              <img
+                src={logoEasy}
+                alt="Logo Easy"
+                className={styles["header__logo-image"]}
+              />
             </Link>
           </div>
 
-          <div className={styles.actions}>
-            <div className={styles.cartContainer}>
+          <div className={styles["header__actions"]}>
+            <div className={styles["header__cart"]}>
               <Link to={""}>
                 <RiUser3Fill size={32} color="#f39c12" />
               </Link>
-              <Link to={"/cart"} className={styles.logoCart}>
+              <Link
+                to={"/cart"}
+                className={styles["header__cart-icon"]}
+                aria-label="Carrinho"
+              >
                 <RiShoppingBag2Fill size={32} color="#f39c12" />
                 {cart.length > 0 && (
-                  <span className={styles.cartCount}>{cart.length}</span>
+                  <span className={styles["header__cart-count"]}>
+                    {cart.length}
+                  </span>
                 )}
               </Link>
             </div>
           </div>
         </div>
-        <div className={styles.search}>
-          <div className={styles.searchContainer}>
+
+        <div className={styles["header__search"]}>
+          <div className={styles["header__search-container"]}>
             <input
               type="text"
               placeholder="Digite o que você procura..."
               value={searchTerm}
               onChange={handleSearch}
-              className={styles.searchInput}
+              className={styles["header__search-input"]}
             />
-            <button onClick={handleSearchButton}>
-              <IoSearchCircle size={44} color="#148f77" />{" "}
+            <button onClick={handleSearchButton} aria-label="buscar">
+              <IoSearchCircle size={44} color="#148f77" />
             </button>
           </div>
+
           {searchResults.length > 0 && (
-            <div className={styles.searchResults}>
+            <div className={styles["header__search-results"]}>
               {searchResults.map((product) => (
                 <p
                   key={product.id}
-                  className={styles.searchResult}
-                  onClick={() => handleSelectProduct(product.id, product.title)}
+                  className={styles["header__search-result"]}
+                  onClick={() => handleSelectProduct(product.id)}
                 >
                   {product.title}
                 </p>
@@ -144,7 +162,9 @@ export function Header() {
       </header>
 
       <div
-        className={`${styles.overlay} ${menuOpen ? styles.overlayVisible : ""}`}
+        className={`${styles["header__overlay"]} ${
+          menuOpen ? styles["header__overlay--visible"] : ""
+        }`}
         onClick={() => setMenuOpen(false)}
       >
         <Sidebar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />

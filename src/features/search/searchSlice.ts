@@ -1,6 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { ProductProps } from "../../utils/product.type";
+import { ProductProps } from "../../utils/@types/product.type";
 
 interface SearchState {
   searchResults: ProductProps[];

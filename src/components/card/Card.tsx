@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { ProductProps } from "../../utils/product.type";
-import styles from "./styles.module.scss";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { addItemCart } from "../../features/cart/cartSlice";
+import { ProductProps } from "../../utils/@types/product.type";
+import styles from "./styles.module.scss";
 
 interface ProductInfo {
   product: ProductProps;
@@ -24,18 +24,20 @@ export function CardProduct({ product }: ProductInfo) {
     dispatch(addItemCart(itemToAdd));
   };
   return (
-    <div className={styles.card}>
-      <Link className={styles.cardImage} to={`/products/${product.id}`}>
+    <div className={styles.productCard}>
+      <Link className={styles.productCard__image} to={`/product/${product.id}`}>
         <img src={product.images[0]} alt={product.title} />
       </Link>
 
-      <div className={styles.cardInfo}>
+      <div className={styles.productCard__info}>
         <h2>{product?.title}</h2>
-        <div className={styles.description}>
+
+        <div className={styles.productCard__description}>
           <span>Descrição:</span>
           <p>{product?.description}</p>
         </div>
-        <div className={styles.price}>
+
+        <div className={styles.productCard__price}>
           <span>Preço:</span>
           <p>
             {product.price.toLocaleString("pt-BR", {
@@ -44,7 +46,13 @@ export function CardProduct({ product }: ProductInfo) {
             })}
           </p>
         </div>
-        <button onClick={handleAddToCart}>Adicionar ao carrinho</button>
+
+        <button
+          className={styles.productCard__button}
+          onClick={handleAddToCart}
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     </div>
   );

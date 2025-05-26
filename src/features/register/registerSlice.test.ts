@@ -1,4 +1,4 @@
-import { authReducer, register } from "./registerSlice";
+import { register, registerReducer } from "./registerSlice";
 
 jest.mock("firebase/auth", () => ({
   getAuth: jest.fn(() => ({
@@ -15,7 +15,7 @@ describe("authSlice", () => {
   };
 
   it("should handle register.pending", () => {
-    const nextState = authReducer(
+    const nextState = registerReducer(
       initialState,
       register.pending("", { email: "", password: "" })
     );
@@ -25,7 +25,7 @@ describe("authSlice", () => {
 
   it("should handle register.fulfilled", () => {
     const mockUser = { uid: "123", email: "teste@teste.com" };
-    const nextState = authReducer(
+    const nextState = registerReducer(
       initialState,
       register.fulfilled(mockUser as any, "", {
         email: "teste@teste.com",
@@ -37,7 +37,7 @@ describe("authSlice", () => {
   });
 
   it("should handle register.rejected", () => {
-    const nextState = authReducer(
+    const nextState = registerReducer(
       initialState,
       register.rejected(
         new Error(),

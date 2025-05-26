@@ -1,6 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { ProductCartProps } from "../../utils/product.type";
+import { ProductCartProps } from "../../utils/@types/product.type";
 
 interface CartState {
   cart: ProductCartProps[];

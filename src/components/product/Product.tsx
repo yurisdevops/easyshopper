@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { addItemCart } from "../../features/cart/cartSlice";
-import { ProductProps } from "../../utils/product.type";
-import { Comments } from "../comments";
+import { ProductProps } from "../../utils/@types/product.type";
+import { Comments } from "../comments/Comments";
 import styles from "./styles.module.scss";
 
 interface ProductInfo {
@@ -25,16 +25,22 @@ export function ProductDetails({ product }: ProductInfo) {
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Detalhes do produto...</h2>
-      <div className={styles.details}>
-        <img src={product.images[0]} alt={product.title} />
-        <div className={styles.detailsInfo}>
-          <h2>{product.title}</h2>
-          <p className={styles.description}>{product.description}</p>
-          <div className={styles.contentInfo}>
-            <div className={styles.content}>
-              <div className={styles.price}>
+    <div className={styles["product"]}>
+      <h2 className={styles["product__title"]}>Detalhes do produto...</h2>
+      <div className={styles["product__details"]}>
+        <img
+          src={product.images[0]}
+          alt={product.title}
+          className={styles["product__image"]}
+        />
+        <div className={styles["product__info"]}>
+          <h2 className={styles["product__info-title"]}>{product.title}</h2>
+          <p className={styles["product__description"]}>
+            {product.description}
+          </p>
+          <div className={styles["product__content-info"]}>
+            <div className={styles["product__content"]}>
+              <div className={styles["product__price"]}>
                 <span>Preço:</span>
                 <p>
                   {product.price.toLocaleString("pt-BR", {
@@ -43,21 +49,26 @@ export function ProductDetails({ product }: ProductInfo) {
                   })}
                 </p>
               </div>
-              <div className={styles.rating}>
+              <div className={styles["product__stock"]}>
                 <span>Disponibilidade:</span>
                 <p>{product.stock ? "Em estoque" : "Esgotado"}</p>
               </div>
-              <div className={styles.available}>
+              <div className={styles["product__rating"]}>
                 <span>Avaliação:</span>
                 <p> {product.rating}</p>
               </div>
-              <button onClick={handleAddToCart}>Adicionar ao carrinho</button>
+              <button
+                className={styles["product__button"]}
+                onClick={handleAddToCart}
+              >
+                Adicionar ao carrinho
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.divisor}></div>
-      <div className={styles.comments}>
+
+      <div className={styles["product__comments"]}>
         <Comments product={product} />
       </div>
     </div>

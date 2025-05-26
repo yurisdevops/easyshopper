@@ -38,7 +38,11 @@ export function Cart() {
   return (
     <main className={styles.main}>
       <section className={styles.container}>
-        <h1 className={styles.title}>Meu Carrinho...</h1>
+        {cart.length > 0 ? (
+          <h1 className={styles.title}>Meu Carrinho...</h1>
+        ) : (
+          <></>
+        )}
         {cart.length > 0 ? (
           cart.map((item) => (
             <>
