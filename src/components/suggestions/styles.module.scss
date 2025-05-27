@@ -1,62 +1,69 @@
-.suggestionsContainer {
-  margin-top: 20px;
-  text-align: center;
-  padding-bottom: 40px;
-}
+.suggestions {
+  &__container {
+    margin-top: 20px;
+    text-align: center;
+    padding-bottom: 40px;
+  }
 
-.sliderWrapper {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
+  &__title {
+    margin: 40px 0;
+  }
 
-.sliderItem {
-  width: 100%;
-  margin: 0 5px;
-}
-.suggestionsTitle {
-  margin: 40px 0;
-}
-
-@media (max-width: 767px) {
-  .sliderWrapper {
+  &__slider {
     display: flex;
-    overflow-x: auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     gap: 16px;
-    scroll-snap-type: x mandatory;
-    padding: 0 16px 10px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    scroll-padding: 16px;
 
-    &::-webkit-scrollbar {
-      display: none;
+    // &--empty {
+    //   /* estilos adicionais se necessário quando vazio */
+    // }
+
+    @media (max-width: 767px) {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 16px 10px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-padding: 16px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
-  .sliderItem {
-    flex: 0 0 auto;
-    width: 250px;
-    scroll-snap-align: center;
-  }
+  // &__placeholder {
+  //   /* placeholder styles aqui, se necessário */
+  // }
 
-  .sliderItem:first-child {
-    margin-left: calc(320vw - 125px);
-  }
+  &__item {
+    width: 100%;
+    margin: 0 5px;
 
-  .sliderItem:last-child {
-    margin-right: calc(123vw - 125px);
-  }
-}
+    @media (max-width: 767px) {
+      flex: 0 0 auto;
+      width: 250px;
+      scroll-snap-align: center;
 
-@media (min-width: 770px) and (max-width: 1024px) {
-  .sliderItem:first-child {
-    margin-left: calc(50vw - 125px);
-  }
+      &:first-child {
+        margin-left: calc(320vw - 125px);
+      }
 
-  .sliderItem:last-child {
-    margin-right: calc(50vw - 125px);
+      &:last-child {
+        margin-right: calc(123vw - 125px);
+      }
+    }
+
+    @media (min-width: 770px) and (max-width: 1024px) {
+      &:first-child {
+        margin-left: calc(50vw - 125px);
+      }
+
+      &:last-child {
+        margin-right: calc(50vw - 125px);
+      }
+    }
   }
 }

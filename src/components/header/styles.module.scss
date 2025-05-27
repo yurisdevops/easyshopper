@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 8px;
+  padding: 10px 0;
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
 
   &__menu {
     width: 100%;
-    max-width: 1024px;
+
     display: flex;
     align-items: center;
   }
@@ -44,7 +44,7 @@
   }
 
   &__menu-button {
-    display: none;
+    display: block;
     background: none;
     border: none;
     font-size: 24px;
@@ -60,11 +60,18 @@
     margin-left: auto;
   }
 
+  &__profile-icon {
+    svg {
+      cursor: pointer;
+    }
+  }
+
   &__cart {
     position: relative;
     display: flex;
     align-items: center;
     gap: 16px;
+    padding-right: 80px;
   }
 
   &__cart-icon {
@@ -92,8 +99,9 @@
 
   &__search {
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
     margin-top: -60px;
+    margin-left: 33px;
   }
 
   &__search-container {
@@ -101,7 +109,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 300px;
+
     padding: 2px;
     border-radius: 5px;
     background-color: transparent;
@@ -120,7 +128,7 @@
     border-radius: 5px;
     outline: none;
     width: 100%;
-    max-width: 300px;
+
     font-size: 16px;
     padding: 15px 5px;
   }
@@ -174,7 +182,7 @@
 }
 
 /* ✅ Responsividade */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .header {
     &--fixed {
       background-color: var(--background-color);
@@ -194,7 +202,7 @@
     &__search {
       display: flex;
       width: 100%;
-      margin-top: 0;
+      margin-top: 15px;
       max-width: none;
     }
 
@@ -203,8 +211,7 @@
     }
 
     &__search-container {
-      width: 100%;
-      max-width: 100%;
+      width: 95%;
     }
 
     &__search-results {
@@ -214,8 +221,20 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
   .header__cart {
     right: 20px;
+  }
+
+  .header__menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header__search {
+    position: static;
+    top: unset;
+    left: unset;
   }
 }

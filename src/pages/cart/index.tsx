@@ -36,70 +36,73 @@ export function Cart() {
   };
 
   return (
-    <main className={styles.main}>
-      <section className={styles.container}>
+    <main className={styles.cart}>
+      <section className={styles["cart__container"]}>
         {cart.length > 0 ? (
-          <h1 className={styles.title}>Meu Carrinho...</h1>
-        ) : (
-          <></>
-        )}
+          <h1 className={styles["cart__title"]}>Meu Carrinho...</h1>
+        ) : null}
+
         {cart.length > 0 ? (
           cart.map((item) => (
-            <>
-              <div key={item.id} className={styles.content}>
-                <div className={styles.cartItem}>
-                  <Link to={`/products/${item.id}`}>
-                    <img src={item.image} alt={item.title} />
-                  </Link>
-                  <div className={styles.cartInfo}>
-                    <div className={styles.cartDetails}>
-                      <h2>{item.title}</h2>
-                      <p className={styles.price}>
-                        {item.price.toLocaleString("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                        })}
-                      </p>
-                      <div className={styles.quantity}>
-                        <p>Quantidade:</p>
-                        <div className={styles.amount}>
-                          <button
-                            className={styles.button}
-                            onClick={() => handleDecrementItem(item.id)}
-                          >
-                            -
-                          </button>
-                          <p className={styles.quantityText}>{item.quantity}</p>
-                          <button
-                            className={styles.button}
-                            onClick={() => handleIncrementItem(item.id)}
-                          >
-                            +
-                          </button>
-                        </div>
+            <div key={item.id} className={styles["cart__content"]}>
+              <div className={styles["cart__item"]}>
+                <Link to={`/product/${item.id}`}>
+                  <img src={item.image} alt={item.title} />
+                </Link>
+                <div className={styles["cart__info"]}>
+                  <div className={styles["cart__details"]}>
+                    <h2>{item.title}</h2>
+                    <p className={styles["cart__price"]}>
+                      {item.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </p>
+                    <div className={styles["cart__quantity"]}>
+                      <p>Quantidade:</p>
+                      <div className={styles["cart__amount"]}>
+                        <button
+                          className={styles["cart__button"]}
+                          onClick={() => handleDecrementItem(item.id)}
+                        >
+                          -
+                        </button>
+                        <p className={styles["cart__quantity-text"]}>
+                          {item.quantity}
+                        </p>
+                        <button
+                          className={styles["cart__button"]}
+                          onClick={() => handleIncrementItem(item.id)}
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
-                    <button
-                      className={styles.buttonRemove}
-                      onClick={() => handleRemoveItem(item.id)}
-                    >
-                      Remover
-                    </button>
                   </div>
+                  <button
+                    className={styles["cart__button--remove"]}
+                    onClick={() => handleRemoveItem(item.id)}
+                  >
+                    Remover
+                  </button>
+                  <div className={styles["cart__divider"]}></div>
                 </div>
               </div>
-              <div className={styles.divisor}></div>
-            </>
+            </div>
           ))
         ) : (
-          <div className={styles.span}>Seu carrinho está vazio.</div>
+          <div className={styles["cart__empty"]}>Seu carrinho está vazio.</div>
         )}
+
         {cart.length > 0 ? (
-          <div className={styles.totalPrice}>
+          <div className={styles["cart__total"]}>
             <span>
               <p>Total:</p> {total}
             </span>
-            <button onClick={handleToCheckout} className={styles.buttonFinish}>
+            <button
+              onClick={handleToCheckout}
+              className={styles["cart__button--finish"]}
+            >
               Finalizar Compra
             </button>
           </div>

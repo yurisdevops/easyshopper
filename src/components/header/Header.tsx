@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../app/store";
 import logoEasy from "../../assets/logo/logoEasy.png";
 import { clearSearch, searchProduct } from "../../features/search/searchSlice";
+import { ModalProfile } from "../modalProfile/ModalProfile";
 import { Sidebar } from "../sidebar/Sidebar";
 import styles from "./styles.module.scss";
 
@@ -14,6 +15,7 @@ export function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [top, setTop] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -112,9 +114,14 @@ export function Header() {
 
           <div className={styles["header__actions"]}>
             <div className={styles["header__cart"]}>
-              <Link to={""}>
-                <RiUser3Fill size={32} color="#f39c12" />
-              </Link>
+              <div className={styles["header__profile-icon"]}>
+                <RiUser3Fill
+                  size={32}
+                  color="#f39c12"
+                  onClick={() => setModalOpen(!modalOpen)}
+                />
+                {modalOpen && <ModalProfile />}
+              </div>
               <Link
                 to={"/cart"}
                 className={styles["header__cart-icon"]}

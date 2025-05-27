@@ -61,15 +61,19 @@ export function Home() {
   }, []);
 
   return (
-    <main className={styles.main}>
-      <Slider images={images} />
-      {error && <p className={styles.error}>{error}</p>}
+    <main className={styles.home}>
+      <section className={styles["home__slider"]}>
+        <Slider images={images} />
+      </section>
 
-      <h1>Produtos em Destaque...</h1>
-      <section className={styles.content}>
+      {error && <p className={styles["home__error"]}>{error}</p>}
+
+      <h1 className={styles["home__title"]}>Produtos em Destaque...</h1>
+
+      <section className={styles["home__content"]}>
         {products.length === 0
           ? [...Array(20)].map((_, index) => (
-              <div key={index} className={styles.placeholderCard}></div>
+              <div key={index} className={styles["home__placeholder"]}></div>
             ))
           : products.map((product) => (
               <CardProduct key={product.id} product={product} />

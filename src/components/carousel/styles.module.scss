@@ -61,4 +61,10 @@
       object-fit: contain;
     }
   }
+
+  @media (max-width: 1024px) {
+    width: 100vw;
+    height: 300px;
+    margin-top: 135px;
+  }
 }

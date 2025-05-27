@@ -2,7 +2,7 @@
 .mobile-menu {
   position: fixed;
   left: 0;
-  width: 57%;
+  width: 15%;
   height: 100vh;
   background-color: var(--white);
   box-shadow: -6px 0px 20px -12px rgba(0, 0, 0, 0.6);
@@ -147,5 +147,10 @@
   transition: background-color 0.2s;
   &:hover {
     background-color: var(--gray-light);
+  }
+}
+@media (max-width: 768px) {
+  .mobile-menu {
+    width: 57%;
   }
 }

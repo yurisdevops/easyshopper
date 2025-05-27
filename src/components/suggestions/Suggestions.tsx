@@ -14,15 +14,27 @@ export function Suggestions({
     .slice(0, 10);
 
   return (
-    <section className={styles.suggestionsContainer}>
-      <h2 className={styles.suggestionsTitle}>Você também pode gostar</h2>
-      <div className={styles.sliderWrapper}>
+    <section className={styles.suggestions__container}>
+      <h2 className={styles.suggestions__title}>Você também pode gostar</h2>
+      <div
+        className={
+          filterSuggestions.length === 0
+            ? `${styles.suggestions__slider} ${styles["suggestions__slider--empty"]}`
+            : styles.suggestions__slider
+        }
+      >
         {filterSuggestions.length === 0
           ? [...Array(4)].map((_, index) => (
-              <div key={index} className={styles.placeholderCard}></div>
+              <div
+                key={index}
+                className={styles.suggestions__slider__placeholder}
+              ></div>
             ))
           : filterSuggestions.map((product) => (
-              <div key={product.id} className={styles.sliderItem}>
+              <div
+                key={product.id}
+                className={styles.suggestions__slider__item}
+              >
                 <CardProduct product={product} />
               </div>
             ))}
